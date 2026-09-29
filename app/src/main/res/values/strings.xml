@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">AUTODIAL</string>
+    <string name="accessibility_service_description">Automates USSD dialing and M-Pesa offer matching.</string>
+</resources>

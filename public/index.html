@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AUTODIAL - Remote Cloud Control</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Firebase Compat SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+    <!-- Auth / Login View -->
+    <div id="authView" class="auth-wrapper">
+        <div class="auth-card">
+            <div class="auth-title">AUTODIAL</div>
+            <div class="auth-subtitle">Remote Web Control Portal</div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Account Email</label>
+                    <input type="email" id="email" class="form-input" placeholder="agent@autodial.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-input" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn-primary">SIGN IN TO TERMINAL</button>
+                <div id="authError" class="error-msg hidden"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Dashboard View -->
+    <div id="dashboardView" class="hidden">
+        <header>
+            <div class="logo-group">
+                <div class="logo-text">AUTODIAL</div>
+                <div id="statusBadge" class="badge-offline">
+                    <span id="statusDot" class="dot-offline"></span>
+                    <span id="statusText">CONNECTING</span>
+                </div>
+            </div>
+            <div class="user-nav">
+                <span id="userEmail" class="user-email"></span>
+                <button id="logoutBtn" class="btn-sm-outline">Sign Out</button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- Remote Automation Switch -->
+            <div class="control-card">
+                <div class="control-info">
+                    <h3>Automation Engine</h3>
+                    <p id="automationSubtext">Enable or pause background transaction processing remotely</p>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="automationToggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <!-- Key Metrics Cards -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">Terminal Device</div>
+                    <div id="metricDevice" class="metric-value" style="font-size: 18px;">--</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">SIM 1 Balance</div>
+                    <div id="metricSim1" class="metric-value highlight">0.00 KES</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">SIM 2 Balance</div>
+                    <div id="metricSim2" class="metric-value highlight">0.00 KES</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Total Commission</div>
+                    <div id="metricCommission" class="metric-value highlight">0.00 KES</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Success Rate</div>
+                    <div id="metricRate" class="metric-value">0%</div>
+                </div>
+            </div>
+
+            <!-- Live Transactions Table -->
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="section-title">Live Transactions Stream</div>
+                    <div id="txnCounter" style="font-size: 13px; color: var(--text-muted);">0 transactions</div>
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date/Time</th>
+                                <th>Customer</th>
+                                <th>Offer / Code</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="txnsTableBody">
+                            <tr>
+                                <td colspan="6" style="text-align: center; color: var(--text-muted); padding: 24px;">Listening for live transactions...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Remote Notes & Logs -->
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="section-title">Send Note to Terminal Screen</div>
+                </div>
+                <p style="font-size: 13px; color: var(--text-muted);">Drop a message or prompt directly to the terminal's Web Drop Notes list.</p>
+                <div class="notes-input-group">
+                    <input type="text" id="noteInput" class="form-input" placeholder="Type a note or message for the operator...">
+                    <button id="sendNoteBtn" class="btn-primary" style="width: 140px; margin: 0;">SEND NOTE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
