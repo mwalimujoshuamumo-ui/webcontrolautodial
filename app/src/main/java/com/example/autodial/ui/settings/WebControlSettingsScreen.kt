@@ -185,6 +185,80 @@ fun WebControlSettingsScreen(viewModel: MainViewModel, onNavigateBack: () -> Uni
                 }
             }
 
+            // GitHub Pages Web Portal Card
+            Card(
+                colors = CardDefaults.cardColors(containerColor = Color(0xFF161B22)),
+                shape = RoundedCornerShape(16.dp)
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(20.dp)
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text("GitHub Pages Web Portal", fontWeight = FontWeight.Bold, color = Color.White)
+                        Surface(
+                            color = GreenLogo.copy(alpha = 0.2f),
+                            shape = RoundedCornerShape(12.dp)
+                        ) {
+                            Text(
+                                text = "GITHUB HOSTED",
+                                color = GreenLogo,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 12.sp,
+                                modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
+                            )
+                        }
+                    }
+
+                    Spacer(Modifier.height(16.dp))
+
+                    Text("GitHub Pages Access URL", fontSize = 12.sp, color = Color.Gray)
+                    Spacer(Modifier.height(4.dp))
+
+                    val githubUrl = "https://mwalimujoshuamumo-ui.github.io/webcontrolautodial/public/"
+                    Surface(
+                        color = Color(0xFF0D1117),
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(12.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                text = githubUrl,
+                                fontWeight = FontWeight.Bold,
+                                color = GreenLogo,
+                                fontSize = 14.sp
+                            )
+                            IconButton(onClick = {
+                                clipboardManager.setText(AnnotatedString(githubUrl))
+                                Toast.makeText(context, "GitHub Pages URL copied to clipboard", Toast.LENGTH_SHORT).show()
+                            }) {
+                                Icon(Icons.Default.ContentCopy, contentDescription = "Copy GitHub URL", tint = Color.White)
+                            }
+                        }
+                    }
+
+                    Spacer(Modifier.height(12.dp))
+
+                    Text(
+                        "Access your AUTODIAL terminal from ANY browser via GitHub Pages web deployment.",
+                        fontSize = 12.sp,
+                        color = Color.LightGray,
+                        lineHeight = 16.sp
+                    )
+                }
+            }
+
             // Local Wi-Fi Status & Connection Card
             Card(
                 colors = CardDefaults.cardColors(containerColor = Color(0xFF161B22)),
